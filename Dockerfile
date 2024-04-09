@@ -1,7 +1,5 @@
 FROM ubuntu:jammy
 
-ARG MINICONDA_URL
-
 # Install third party tools
 RUN apt-get update && \
     apt-get install -y bash gcc git jq wget g++ make && \
@@ -27,7 +25,7 @@ RUN echo "alias ls='ls -F'" >> /root/.bashrc
 # Install miniconda
 ENV PATH="/root/miniconda3/bin:${PATH}"
 ARG PATH="/root/miniconda3/bin:${PATH}"
-RUN wget ${MINICONDA_URL} -O miniconda.sh \
+RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh \
     && mkdir /root/.conda \
     && bash miniconda.sh -b \
     && rm -f miniconda.sh
